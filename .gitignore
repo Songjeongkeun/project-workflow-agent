@@ -1,0 +1,22 @@
+# Local inputs, generated projects and backups
+input/
+output/
+examples/
+_old/
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local credentials and editor files
+.env
+.env.*
+.DS_Store
+.vscode/
+.idea/
+node_modules/

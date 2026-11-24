@@ -1,0 +1,102 @@
+{
+  "overview": {
+    "project_name": null,
+    "team_name": null,
+    "team_members": [],
+    "written_on": null,
+    "summary": null
+  },
+  "user_problem": {
+    "target_users": null,
+    "usage_context": null,
+    "current_method": null,
+    "pain_points": null,
+    "evidence": []
+  },
+  "goals": {
+    "expected_change": null,
+    "metrics": [
+      {
+        "name": null,
+        "current_value": null,
+        "target_value": null,
+        "measurement_method": null,
+        "measurement_timing": null
+      }
+    ]
+  },
+  "release_scope": {
+    "features": [
+      {
+        "name": null,
+        "behavior_and_value": null,
+        "priority": null,
+        "included_in_release": null
+      }
+    ],
+    "out_of_scope": [],
+    "supported_platforms": [],
+    "service_components_and_integrations": null,
+    "access_install_and_run": null
+  },
+  "user_experience": {
+    "flow": null,
+    "screens": [
+      {
+        "screen_or_step": null,
+        "displayed_information": null,
+        "input_fields": [],
+        "user_action": null,
+        "next_screen": null
+      }
+    ],
+    "design_links": []
+  },
+  "policies": {
+    "eligibility_and_permissions": null,
+    "behavior_and_state_changes": null,
+    "exceptions": [
+      {
+        "condition": null,
+        "system_response": null,
+        "user_guidance": null,
+        "recovery": null
+      }
+    ],
+    "open_considerations": []
+  },
+  "data_rules": {
+    "fields": [
+      {
+        "name": null,
+        "purpose": null,
+        "source": null,
+        "format_and_structure": null,
+        "required": null
+      }
+    ],
+    "storage_and_management": null,
+    "input_validation": null,
+    "error_and_integrity_handling": null
+  },
+  "release_plan": {
+    "milestones": [
+      {
+        "stage": null,
+        "schedule": null,
+        "owner": null,
+        "deliverable": null,
+        "completion_criteria": null
+      }
+    ],
+    "pre_launch_checks": [],
+    "post_launch_checks": [],
+    "glossary_and_references": [
+      {
+        "name": null,
+        "definition": null,
+        "url": null
+      }
+    ]
+  }
+}

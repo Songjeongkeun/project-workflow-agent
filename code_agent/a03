@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+cd -- "$(dirname -- "$0")"
+
+if [[ "${1:-}" == --help || "${1:-}" == -h ]]; then
+  printf '%s\n' '사용법: ./a03 [기획 JSON 이름]' '예: ./a03 또는 ./a03 meeting_revoke'
+  exit 0
+fi
+
+name=${1:-planning}
+input="output/${name%.json}.json"
+if [[ $# -gt 1 || "$name" == */* || ! -f "$input" ]]; then
+  printf 'output 폴더에 있는 기획 JSON의 이름을 입력하세요. 예: ./a03 meeting_revoke\n' >&2
+  exit 1
+fi
+
+export PYTHONPATH=.
+run=$(mktemp -d "output/a03-test.XXXXXX")
+printf '결과 폴더: %s/%s\n' "$PWD" "$run"
+
+./.venv/bin/python spec_main.py "$input" -o "$run/tech_spec.json"
+./.venv/bin/python code_main.py plan "$run/tech_spec.json" \
+  --plan "$input" -o "$run/work_plan.json"
+
+printf '\n작업 계획을 확인했으면 y를 입력하세요. [y/N] '
+if read -r answer && [[ "$answer" == y || "$answer" == Y ]]; then
+  ./.venv/bin/python code_main.py write "$run/work_plan.json" \
+    --spec "$run/tech_spec.json" --plan "$input" --workspace "$run/project"
+fi
