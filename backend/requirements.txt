@@ -1,0 +1,12 @@
+fastapi==0.162.7
+uvicorn[standard]==0.54.0
+pydantic==2.14.3
+langgraph==1.2.22
+python-dotenv==1.2.4
+
+# workspace 서버 (MCP). 2.x는 FastMCP 이름이 바뀌어서 1.x로 고정한다
+mcp==1.30.0
+
+# 테스트
+pytest==9.2.0
+httpx==0.28.1

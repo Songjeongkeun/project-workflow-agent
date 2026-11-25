@@ -1,0 +1,19 @@
+# 비밀값과 실행 데이터
+.env
+data/
+workspaces/
+
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# 개인 설정
+.claude/settings.local.json
+*.log

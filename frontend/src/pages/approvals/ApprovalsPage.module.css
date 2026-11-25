@@ -1,0 +1,29 @@
+.page { padding: 32px 40px; display: flex; flex-direction: column; gap: 24px; }
+
+/* 대기 중: 열 폭은 피그마 비율 (300 / 350 / 120 / 200 / 나머지) */
+.table th:nth-child(1) { width: 27%; }
+.table th:nth-child(2) { width: 31%; }
+.table th:nth-child(3) { width: 11%; }
+.table th:nth-child(4) { width: 18%; }
+.table td { height: 98px; }
+.strong { color: var(--text) !important; font-weight: 700; }
+.go { color: var(--muted); white-space: nowrap; }
+.go:hover { color: var(--primary); }
+.note { margin: -8px 0 0; color: var(--muted); font-size: 13px; line-height: 21px; }
+
+/* 처리한 내역: 한 건이 두 줄 (내용, 의견) */
+.doneTable th:nth-child(1) { width: 39%; }
+.doneTable th:nth-child(2) { width: 13%; }
+.doneTable th:nth-child(3) { width: 26%; }
+.page .doneTable td { color: var(--text); font-size: 14px; line-height: 22px; padding: 21px 17px 0; border-bottom: none; }
+.page .doneRow td.comment { color: var(--muted); font-size: 13px; line-height: 21px; padding: 24px 17px 22px; border-bottom: 1px solid var(--border); }
+.page .doneRow:last-child td.comment { border-bottom: none; }
+.plainLink { color: inherit; }
+.plainLink:hover { color: var(--primary); }
+.reject { color: var(--bad) !important; }
+
+/* 휴대폰 폭 */
+@media (max-width: 768px) {
+  .page { padding: 16px; }
+  .table td { height: auto; }
+}

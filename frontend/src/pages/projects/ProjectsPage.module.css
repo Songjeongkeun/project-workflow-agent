@@ -1,0 +1,19 @@
+.page { padding: 32px 40px; display: flex; flex-direction: column; gap: 24px; }
+/* 피그마: 카드는 폭 전체, 카드 사이 28px */
+.list { display: flex; flex-direction: column; gap: 28px; }
+.list:empty { display: none; }
+
+/* 새 프로젝트 대화상자 */
+.form { display: flex; flex-direction: column; }
+.field { gap: 17px; font-size: 13px; font-weight: 700; line-height: 21px; }
+.field input { height: 48px; padding: 0 13px; border-radius: 8px; font-size: 14px; font-weight: 400; }
+.field input::placeholder { color: var(--muted); }
+.help { margin: 28px 0 0; color: var(--muted); font-size: 14px; line-height: 22px; }
+.buttons { display: grid; grid-template-columns: 160px 1fr; gap: 22px; margin-top: 60px; }
+
+/* 휴대폰 폭 */
+@media (max-width: 768px) {
+  .page { padding: 16px; }
+  .list { gap: 12px; }
+  .buttons { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 32px; }
+}

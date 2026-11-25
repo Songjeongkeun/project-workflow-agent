@@ -1,0 +1,51 @@
+/* 피그마: 폭 232px, 배경 #19191f, 메뉴 항목 200×42 (안쪽 여백 16px) */
+.sidebar {
+  background: var(--nav-bg); color: var(--nav-text);
+  display: flex; flex-direction: column; padding: 25px 16px 6px;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+}
+.brand { color: #fff; font-weight: 700; font-size: 26px; line-height: 42px; padding: 0 12px; margin-bottom: 23px; }
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.link {
+  display: flex; justify-content: space-between; align-items: center;
+  height: 42px; padding: 0 16px; border-radius: 6px; color: var(--nav-text); font-size: 14px;
+}
+.link:hover { color: #fff; text-decoration: none; background: rgba(255, 255, 255, 0.04); }
+.active, .active:hover { background: var(--nav-active-bg); color: var(--nav-active-text); font-weight: 700; }
+.count {
+  min-width: 24px; height: 22px; padding: 0 6px; border-radius: 4px; background: var(--nav-count-bg);
+  color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* 프로젝트 안: 구분선 아래 프로젝트 이름과 메뉴 */
+.project { margin-top: 18px; padding-top: 23px; border-top: 1px solid var(--nav-line); }
+.projectName { color: #fff; font-weight: 700; font-size: 14px; line-height: 22px; padding: 0 12px; margin-bottom: 18px; }
+
+.user {
+  margin-top: auto; border-top: 1px solid var(--nav-line); padding: 23px 12px 0;
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.userName { color: #fff; font-weight: 700; font-size: 14px; line-height: 22px; }
+.userSub { font-size: 12px; line-height: 19px; margin-top: 6px; }
+.logout {
+  margin: 8px 0 0 -4px; padding: 4px; border: none; background: transparent; cursor: pointer;
+  color: var(--nav-text); font: inherit; font-size: 12px; text-decoration: underline;
+}
+.logout:hover { color: #fff; }
+
+/* 휴대폰 폭: 위쪽 메뉴 줄로 */
+@media (max-width: 768px) {
+  .sidebar {
+    position: static; height: auto; flex-direction: row; align-items: center; flex-wrap: wrap;
+    gap: 4px 8px; padding: 8px 12px; align-content: flex-start;
+  }
+  .brand { font-size: 20px; line-height: 32px; padding: 0 8px 0 4px; margin: 0; }
+  .nav { flex-direction: row; }
+  .link { height: 36px; padding: 0 10px; gap: 6px; white-space: nowrap; }
+  .user { margin: 0 0 0 auto; padding: 0; border-top: none; flex-direction: row; align-items: center; gap: 8px; }
+  .userSub { display: none; }
+  .logout { margin: 0; }
+  /* 프로젝트 메뉴는 아래 줄 전체를 쓰고, 넘치면 옆으로 민다 */
+  .project { order: 1; width: 100%; margin: 0; padding: 4px 0 0; display: flex; align-items: center; gap: 8px; overflow-x: auto; }
+  .projectName { display: none; }
+}

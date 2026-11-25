@@ -1,0 +1,2 @@
+/* 빨간 안내 상자 (피그마 "실패" 상자와 같은 색) */
+.error { padding: 12px 16px; border-radius: var(--radius); background: #fff0f0; color: #af3c3c; font-size: 14px; line-height: 22px; }

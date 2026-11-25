@@ -1,0 +1,13 @@
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 42px; padding: 10px 18px; border-radius: 6px; font-size: 13px; border: 1px solid transparent;
+  font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap; text-decoration: none !important;
+}
+.button:disabled { opacity: 0.5; cursor: not-allowed; }
+.primary { background: var(--primary); color: #fff; }
+.secondary { background: #fff; color: var(--text); border-color: var(--border); }
+.button:disabled.primary { background: #e7e7ee; color: var(--muted); opacity: 1; }
+.ghost { background: transparent; color: var(--muted); }
+.danger { background: var(--bad); color: #fff; }
+.sm { min-height: 0; padding: 4px 10px; font-size: 13px; }
+.block { width: 100%; margin-top: 12px; }

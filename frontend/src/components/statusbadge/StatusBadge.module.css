@@ -1,0 +1,10 @@
+/* 피그마: 높이 28px, 모서리 4px, 12px 굵게 */
+.badge {
+  display: inline-flex; align-items: center; height: 28px; padding: 0 9px; border-radius: 4px;
+  font-size: 12px; font-weight: 700; white-space: nowrap; background: #eef0f3; color: var(--muted);
+}
+.running { background: var(--info-weak); color: var(--info); }
+.waiting_input, .waiting_approval { background: var(--warn-weak); color: var(--warn); }
+.failed { background: var(--bad-weak); color: var(--bad); }
+.void { background: #eef0f3; color: var(--muted); }
+.done { background: #ebf5f0; color: #267253; }
