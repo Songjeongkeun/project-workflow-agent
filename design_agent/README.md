@@ -4,7 +4,6 @@ A01에서 작성한 **서비스 기획서 JSON**을 입력받아 화면 계획(`
 
 Figma 작업 후 화면별 URL과 노드 ID를 검증해 `screen_plan.json`의 `design_ref`에 저장하고, 이를 A03 개발 에이전트에 전달합니다.
 
-> **담당 범위:** MVP 기능의 선정은 A01에서 수행합니다. A02는 A01에서 확정한 출시 범위를 바탕으로 화면을 설계하며, MVP를 다시 선정하지 않습니다.
 
 ## 1. 주요 기능
 
@@ -94,7 +93,7 @@ FigmaAgent/
 
 ```bash
 git clone <REPOSITORY_URL>
-cd FigmaAgent
+cd design_agent
 ```
 
 `<REPOSITORY_URL>`을 실제 GitHub 저장소 주소로 바꾸세요. 다운로드한 폴더명이 다르면 `cd` 경로도 변경합니다.
