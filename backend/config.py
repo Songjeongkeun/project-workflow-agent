@@ -42,12 +42,17 @@ ALLOWED_COMMANDS = [
     ["npm", "run", "build"],
     ["pip", "install", "-r", "requirements.txt"],
     ["make", "test"],
-    ["docker", "compose", "build"]
-] 
+    # docker compose build는 뺀다: 컨테이너 안에서 실행하려면 docker 권한이 필요해 격리가 깨진다.
+    # 이미지 빌드는 deploy_local이 compose 파일을 검사한 뒤에 한다.
+]
 
-# True면 명령을 프로젝트 컨테이너 안에서 실행한다. 
-# False면 폴더에서 바로 실행
+# True면 생성된 코드의 명령을 명령마다 새 컨테이너에서 실행하고(workspace_server/sandbox.py),
+# 배포 전에 docker-compose.yml을 검사한다. 서버에서는 꼭 true. False면 폴더에서 바로 실행(개발용)
 USE_CONTAINER = os.getenv("ORBIT_USE_CONTAINER", "false") == "true"
+SANDBOX_IMAGE = os.getenv("ORBIT_SANDBOX_IMAGE", "orbit-runner:1")
+SANDBOX_USER = os.getenv("ORBIT_SANDBOX_USER", "1000:1000")  # 서버 사용자(jeongkeun)의 uid:gid
+SANDBOX_MEMORY = os.getenv("ORBIT_SANDBOX_MEMORY", "2g")
+SANDBOX_CPUS = os.getenv("ORBIT_SANDBOX_CPUS", "2")
 
 # -- 게시와 배포 대상 (04 6장, 7.3) --
 # 생성 서비스를 올릴 GitHub 테스트 저장소 "owner/name". 비어 있으면 게시(push)를 막는다

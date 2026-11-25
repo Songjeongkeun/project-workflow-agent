@@ -9,7 +9,7 @@ import pytest
 
 import config
 import db
-from workspace_server import guards
+from workspace_server import guards, sandbox
 
 
 def test_safe_path_blocks_escape(tmp_path, monkeypatch):
@@ -183,3 +183,57 @@ def test_deploy_local_runs_approved_commit(a03_run, tmp_path, monkeypatch):
     out = server.deploy_local(run_id, "A05", sha3)
     assert not out["ok"] and not out["denied"] and "docker-compose.yml" in out["reason"]
     assert len(calls) == 2  # compose는 부르지 않았다
+
+
+# ---- 컨테이너 격리 (sandbox.py). 실제 docker 없이 인자와 검사 결과만 본다 ----
+
+def test_sandbox_isolates_command(tmp_path):
+    test = sandbox.docker_args(tmp_path, 3, ["make", "test"], "c1")
+    install = sandbox.docker_args(tmp_path, 3, ["npm", "install"], "c2")
+
+    assert test[test.index("--network") + 1] == "none"          # 테스트는 네트워크 없이
+    assert install[install.index("--network") + 1] == "bridge"  # 설치만 네트워크 허용
+    assert f"{tmp_path}:/workspace" in test                     # 이 프로젝트 폴더만
+    assert sum(a == "-v" for a in test) == 1                    # 다른 폴더는 안 붙임
+    assert "--cap-drop" in test and "--privileged" not in test
+    assert not any("TOKEN" in a for a in test)                  # 토큰 같은 환경 변수가 없음
+    assert test[-2:] == ["make", "test"]
+
+
+def test_sandbox_kills_container_on_timeout(tmp_path, monkeypatch):
+    """시간을 넘기면 subprocess만 끊지 않고 컨테이너도 멈춘다."""
+    import subprocess
+
+    calls = []
+
+    def fake_run(args, **kwargs):
+        calls.append(args)
+        if args[:2] == ["docker", "run"]:
+            raise subprocess.TimeoutExpired(args, 1)
+        return subprocess.CompletedProcess(args, 0, "", "")
+
+    monkeypatch.setattr(sandbox.subprocess, "run", fake_run)
+    out = sandbox.run(tmp_path, 3, ["make", "test"])
+    assert out["timed_out"] is True
+    name = calls[0][calls[0].index("--name") + 1]
+    assert calls[1] == ["docker", "kill", name]
+
+
+def test_compose_check_blocks_host_access(tmp_path):
+    ok = {"services": {"web": {"build": {"context": str(tmp_path)},
+                               "ports": [{"target": 8000, "published": "9003"}]}}}
+    assert sandbox.compose_problems(ok, tmp_path, 9003) == []
+
+    bad = {"services": {"web": {
+        "privileged": True,
+        "volumes": [{"type": "bind", "source": "/"}],
+        "build": {"context": str(tmp_path.parent)},
+        "ports": [{"target": 22, "published": "22"}],
+    }}, "volumes": {"x": {"driver_opts": {"o": "bind", "device": "/"}}}}
+    # privileged, 서버 / 붙이기, 저장소 밖 빌드, 다른 포트, driver_opts 우회
+    assert len(sandbox.compose_problems(bad, tmp_path, 9003)) == 5
+
+
+def test_docker_compose_build_not_allowed():
+    with pytest.raises(guards.Denied):
+        guards.check_command("docker compose build")

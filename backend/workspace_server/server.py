@@ -10,7 +10,6 @@ A03, A04, A05가 요청한 파일 작업과 명령 실행을 검사한 뒤 대�
 이 순서를 guarded() 한 곳에 모으고, 각 도구 함수는 3. 실행 단계에서 할 일만 적는다.
 """
 
-import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -20,7 +19,7 @@ from mcp.server.fastmcp import FastMCP
 
 import config
 from db import get_connection
-from workspace_server import gitops, guards
+from workspace_server import gitops, guards, sandbox
 from workspace_server.record import record
 
 # MCP 서버 객체 생성
@@ -111,14 +110,17 @@ def write_file(run_id: int, agent: str, path: str, content: str) -> dict:
 @mcp.tool()
 def run_command(run_id: int, agent: str, command: str) -> dict:
     """허용된 설치·빌드·테스트 명령을 실행하고 종료 코드와 출력을 돌려준다.
-    허용 명령: npm install, npm run build, pip install -r requirements.txt, make test, docker compose build
+    허용 명령: npm install, npm run build, pip install -r requirements.txt, make test
+    빌드·테스트는 네트워크 없이 실행된다.
     """
     def work(run, root):
         args = guards.check_command(command)
 
+        # 서버: 명령마다 새 컨테이너에서 실행 (이 프로젝트 폴더만 보이고 토큰은 없다)
         if config.USE_CONTAINER:
-            args = ["docker", "exec", "-w", "/workspace", f"orbit-p{run['project_id']}", *args]
+            return sandbox.run(root, run["project_id"], args)
 
+        # 개발용(이 PC): 폴더에서 바로 실행
         try:
             r = subprocess.run(
                 args, cwd=root, capture_output=True, text=True,
@@ -180,11 +182,15 @@ def git_push(run_id: int, agent: str, sha: str) -> dict:
     return guarded("git_push", run_id, agent, sha, work, extra_check=check)
 
 
+# compose에 넘기는 환경 변수. 서버 환경(토큰 등)은 넘기지 않는다 (compose 파일이 ${GITHUB_TOKEN}을 꺼내 쓰지 못하게)
+COMPOSE_ENV = {"PATH": "/usr/local/bin:/usr/bin:/bin"}
+
+
 def _compose_up(folder: Path, project: str, env: dict) -> None:
     """folder의 docker-compose.yml로 서비스를 (다시) 띄운다. 테스트에서는 이 함수를 바꿔 끼운다."""
     r = subprocess.run(
         ["docker", "compose", "-p", project, "up", "-d", "--build", "--remove-orphans"],
-        cwd=folder, env={**os.environ, **env}, capture_output=True, text=True,
+        cwd=folder, env={**COMPOSE_ENV, **env}, capture_output=True, text=True,
         encoding="utf-8", errors="replace", timeout=config.COMMAND_TIMEOUT,
     )
     if r.returncode != 0:
@@ -223,7 +229,11 @@ def deploy_local(run_id: int, agent: str, sha: str) -> dict:
 
         port = config.DEPLOY_PORT_BASE + pid
         project = f"orbit-test-p{pid}"
-        _compose_up(folder, project, {"ORBIT_PORT": str(port), "GIT_SHA": sha})
+        env = {"ORBIT_PORT": str(port), "GIT_SHA": sha}
+        # 서버 폴더를 붙이거나 privileged 같은 위험한 설정이 있으면 띄우기 전에 거부한다
+        if config.USE_CONTAINER:
+            sandbox.check_compose(folder, project, env, port)
+        _compose_up(folder, project, env)
         return {
             "deployed_sha": sha,
             "deployment_id": f"{project}@{sha[:12]}",
