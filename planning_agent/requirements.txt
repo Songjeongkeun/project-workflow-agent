@@ -1,0 +1,5 @@
+openai>=2,<3
+langgraph>=0.3,<2
+pydantic>=2.8,<3
+python-dotenv>=1,<2
+filelock>=3,<4
