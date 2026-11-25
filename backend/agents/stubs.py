@@ -43,8 +43,8 @@ def plan(inp: PlanningInput) -> PlanningOutput:
             top += 1
             fid = f"FEAT-{top:03d}"
         features.append({
-            "id": fid, "name": _title(m["body"]), "behavior": m["body"].strip(),
-            "priority": "필수", "included": True, "_source": key,
+            "id": fid, "name": _title(m["body"]), "behavior_and_value": m["body"].strip(),
+            "priority": "필수", "included_in_release": True, "_source": key,
         })
         evidence.append({
             "field_path": f"release_scope.features[{len(features) - 1}].behavior",
@@ -91,7 +91,7 @@ def plan(inp: PlanningInput) -> PlanningOutput:
     lines = ["# 기획서 (임시 에이전트 초안)", "", "## 개요", "", planning["overview"]["summary"] or "**미정**", "", "## 대상 사용자", ""]
     lines += [f"- {u}" for u in target_users] or ["- **미정**"]
     lines += ["", "## 출시 범위", "", "| ID | 기능 | 동작 |", "|---|---|---|"]
-    lines += [f"| {f['id']} | {f['name']} | {f['behavior'].replace('|', '/').replace(chr(10), ' ')} |" for f in features]
+    lines += [f"| {f['id']} | {f['name']} | {f['behavior_and_value'].replace('|', '/').replace(chr(10), ' ')} |" for f in features]
     lines += ["", "## 기술 스택 제안", ""]
     lines += [f"- {t['area']}: {t['choice']} ({t['reason']})" for t in planning["release_scope"]["tech_stack"]]
 

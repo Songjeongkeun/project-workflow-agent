@@ -34,7 +34,7 @@ def get_planning(pid: int, request: Request):
             "brief": bundle["brief"],
             "project_type": scope.get("project_type"),
             "tech_stack": scope.get("tech_stack", []),
-            "features": [{"id": f["id"], "name": f["name"], "included": f.get("included")} for f in scope.get("features", [])],
+            "features": [{"id": f["id"], "name": f["name"], "included": f.get("included_in_release")} for f in scope.get("features", [])],
             "acceptance_criteria": [{**c, "feature_name": names.get(c["feature_id"])} for c in bundle["criteria"]],
             "required_open_questions": len(planning.open_questions(conn, pid, required_only=True)),
             "can_confirm": not blockers and "planner" in roles,

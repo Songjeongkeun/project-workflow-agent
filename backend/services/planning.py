@@ -210,9 +210,9 @@ def confirm_blockers(conn, project_id: int) -> list[str]:
     if not features:
         reasons.append("정리된 기능이 없습니다.")
     for f in features:
-        if f.get("included") is None:
+        if f.get("included_in_release") is None:
             reasons.append(f"{f['id']}의 출시 포함 여부가 정해지지 않았습니다.")
-        elif f.get("included") and not any(c["feature_id"] == f["id"] and c["kind"] == "정상" for c in bundle["criteria"]):
+        elif f.get("included_in_release") and not any(c["feature_id"] == f["id"] and c["kind"] == "정상" for c in bundle["criteria"]):
             reasons.append(f"{f['id']}에 정상 완료 조건이 없습니다.")
     if scope.get("container_supported") is False:
         reasons.append("컨테이너에서 실행·검사할 수 없는 유형은 지원하지 않습니다.")
