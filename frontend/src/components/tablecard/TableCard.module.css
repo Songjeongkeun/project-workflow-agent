@@ -1,0 +1,10 @@
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto; }
+.card table { min-width: 100%; }
+.card th { padding: 11px 15px 12px; font-size: 12px; line-height: 19px; }
+.card td { padding: 15px; font-size: 13px; line-height: 21px; color: var(--muted); }
+.card tr:last-child td { border-bottom: none; }
+
+/* 휴대폰 폭: 글자를 쪼개지 않고 표만 옆으로 밀어서 본다 */
+@media (max-width: 768px) {
+  .card th, .card td { white-space: nowrap; }
+}

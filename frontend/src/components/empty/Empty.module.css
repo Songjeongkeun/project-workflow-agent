@@ -1,0 +1,20 @@
+.empty {
+  padding: 40px; text-align: center; color: var(--muted); background: #fff;
+  border: 1px dashed var(--border); border-radius: var(--radius);
+}
+/* 문장 뒤에 오는 버튼 묶음 등은 한 줄 띄운다 (글 속의 링크는 그대로 이어진다) */
+.empty > div { margin-top: 12px; }
+
+/* 큰 빈 화면 (피그마 "프로젝트 빈 화면", "승인함 빈 화면") */
+.large {
+  min-height: 560px; padding: 40px 24px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+}
+.title { margin: 0; font-size: 24px; line-height: 38px; font-weight: 700; color: var(--text); }
+.description { margin: 18px 0 0; font-size: 15px; line-height: 24px; color: var(--muted); }
+.action { margin-top: 48px; }
+.action > * { min-width: 240px; }
+
+@media (max-width: 768px) {
+  .large { min-height: 360px; }
+}

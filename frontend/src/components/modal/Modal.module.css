@@ -1,0 +1,9 @@
+.backdrop {
+  position: fixed; inset: 0; z-index: 100; background: rgba(25, 25, 31, 0.38);
+  display: grid; place-items: center; padding: 16px;
+}
+.box {
+  width: min(560px, 100%); background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 23px 27px 32px;
+}
+.title { font-size: 22px; line-height: 35px; margin-bottom: 26px; }

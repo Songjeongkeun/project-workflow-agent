@@ -1,0 +1,69 @@
+.page { padding: 32px 40px; display: flex; flex-direction: column; gap: 24px; }
+
+/* 5단계 진행: 한 상자 안 5칸, 칸 사이 세로 구분선 */
+.pipeline {
+  display: grid; grid-template-columns: repeat(5, minmax(150px, 1fr)); overflow-x: auto;
+  padding: 22px 0 26px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.step { padding: 0 16px 0 19px; min-height: 76px; }
+.step + .step { border-left: 1px solid var(--border); }
+.stepName { font-size: 15px; line-height: 24px; font-weight: 700; color: var(--text); }
+.current { color: var(--primary); }
+.stepNote { margin-top: 17px; font-size: 12px; line-height: 19px; color: var(--muted); }
+.attention { color: var(--warn); }
+
+/* 안내 상자 */
+.box { padding: 14px 20px 18px; border-radius: var(--radius); }
+.boxTitle { margin: 0; font-size: 14px; line-height: 22px; font-weight: 700; }
+.boxText { margin: 10px 0 0; font-size: 14px; line-height: 22px; color: var(--muted); }
+.warn { background: var(--warn-weak); }
+.warn .boxTitle { color: var(--warn); }
+.bad { background: #fff0f0; }
+.bad .boxTitle { color: #af3c3c; font-size: 15px; line-height: 24px; }
+.info { background: var(--info-weak); }
+.info .boxTitle { color: var(--info); }
+.muted { background: #eef0f3; }
+.muted .boxTitle { color: var(--text); }
+.actionRow { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: -2px; color: var(--muted); font-size: 13px; }
+.actionButton > * { min-width: 208px; }
+
+/* 산출물 표 */
+.table th:nth-child(1) { width: 17%; }
+.table th:nth-child(2) { width: 39%; }
+.table th:nth-child(3) { width: 25%; }
+.table td { height: 64px; }
+.table td a { color: var(--muted); }
+.table td a:hover { color: var(--primary); }
+.strong { color: var(--text) !important; font-weight: 700; }
+.none { color: #b7b6c4; }
+.wide { min-width: 144px; }
+
+/* 배포 완료 */
+.doneBanner { background: #ebf5f0; border-radius: var(--radius); padding: 20px 22px 24px; }
+.doneTitle { margin: 0; color: #267253; font-size: 22px; line-height: 35px; font-weight: 700; }
+.doneText { margin: 13px 0 0; color: #267253; font-size: 14px; line-height: 22px; }
+.doneUrl { margin-top: 8px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 16px; line-height: 26px; font-weight: 700; word-break: break-all; }
+.doneUrl > button { min-width: 204px; }
+.donePipeline { padding: 17px 0 22px; }
+.donePipeline .step + .step { border-left: none; }
+.okNote { margin-top: 16px; font-size: 13px; line-height: 21px; color: #267253; }
+
+/* Figma 작업 범위 확인 */
+.scope { display: grid; grid-template-columns: minmax(0, 736fr) minmax(0, 368fr); gap: 24px; align-items: start; }
+.side { display: flex; flex-direction: column; gap: 22px; }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 21px 23px 32px; }
+.panelTitle { font-size: 18px; line-height: 29px; margin-bottom: 14px; }
+.side .panelTitle { font-size: 17px; line-height: 27px; }
+.label { margin: 21px 0 7px; color: var(--muted); font-size: 13px; line-height: 21px; }
+.value { margin: 0; color: var(--text); font-size: 15px; line-height: 24px; }
+.valueStrong { margin: 0; color: var(--text); font-size: 16px; line-height: 26px; font-weight: 700; }
+.help { margin: 20px 0 0; color: var(--muted); font-size: 14px; line-height: 22px; }
+.small { margin: 0; color: var(--muted); font-size: 12px; line-height: 19px; }
+
+/* 휴대폰 폭 */
+@media (max-width: 768px) {
+  .page { padding: 16px; }
+  .scope { grid-template-columns: 1fr; }
+  .actionRow { flex-direction: column; align-items: stretch; }
+  .doneUrl { flex-direction: column; align-items: stretch; }
+}

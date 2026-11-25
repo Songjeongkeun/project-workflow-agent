@@ -1,0 +1,9 @@
+/* 피그마: 제목 28px 굵게, 아래 설명 14px (제목과 9px 간격), 오른쪽 버튼 */
+.pageTitle { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
+.sub { margin: 9px 0 0; font-size: 14px; line-height: 22px; }
+.actions { display: flex; gap: 8px; align-items: center; }
+
+/* 휴대폰 폭 */
+@media (max-width: 768px) {
+  .pageTitle { flex-wrap: wrap; }
+}

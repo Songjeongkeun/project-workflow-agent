@@ -1,0 +1,63 @@
+.page { padding: 32px 40px; display: flex; flex-direction: column; gap: 24px; }
+
+/* 피그마: 왼쪽 760 + 오른쪽 344, 사이 24 */
+.layout { display: grid; grid-template-columns: minmax(0, 760fr) minmax(0, 344fr); gap: 24px; align-items: start; }
+.left { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.side { display: flex; flex-direction: column; gap: 24px; }
+
+/* 대화 기록: 말풍선 대신 "보낸 사람 + 본문", 에이전트 답 앞에 구분선 */
+.log {
+  background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 23px 24px 24px; max-height: 594px; overflow-y: auto;
+}
+.message + .message { margin-top: 32px; }
+.userName, .agentName { margin: 0; font-size: 12px; line-height: 19px; font-weight: 700; }
+.userName { color: var(--muted); }
+.agentName { color: var(--primary); }
+.body { margin: 11px 0 0; font-size: 15px; line-height: 24px; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+.muted { color: var(--muted); }
+.divider { border: none; border-top: 1px solid var(--border); margin: 30px 0 21px; }
+.draftButton { margin-top: 22px; min-width: 190px; }
+
+/* 입력 상자 */
+.composer { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 17px 19px 13px; }
+.composer textarea { border: none; padding: 0; font-size: 14px; line-height: 22px; resize: none; min-height: 44px; }
+.composer textarea:focus { outline: none; }
+.composer textarea::placeholder { color: var(--muted); }
+.composerBottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-top: 6px; }
+.sendButton { min-width: 110px; }
+.small { color: var(--muted); font-size: 12px; line-height: 19px; }
+
+/* 오른쪽 상자 */
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 19px 21px 28px; display: flex; flex-direction: column; align-items: flex-start; }
+.panelTitle { font-size: 16px; line-height: 26px; margin-bottom: 14px; }
+.tag { display: inline-flex; align-items: center; height: 28px; padding: 0 9px; border-radius: 4px; font-size: 12px; font-weight: 700; background: #eef0f3; color: var(--muted); }
+.required { background: var(--warn-weak); color: var(--warn); }
+.question { margin: 20px 0 0; font-size: 16px; line-height: 26px; font-weight: 700; color: var(--text); }
+.answerLabel { align-self: stretch; margin-top: 28px; gap: 9px; font-size: 13px; line-height: 21px; font-weight: 700; }
+.answerLabel textarea { min-height: 74px; border-radius: 8px; font-weight: 400; }
+.panel > button { margin-top: 34px; }
+.panel > .small { margin: 10px 0 0; }
+.help { margin: 0; color: var(--muted); font-size: 14px; line-height: 22px; }
+.features { list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: 14px; line-height: 22px; }
+.featureId { margin-right: 8px; }
+
+/* 처리 중 배지 */
+.processing { display: inline-flex; align-items: center; height: 28px; padding: 0 9px; border-radius: 4px; font-size: 12px; font-weight: 700; background: var(--primary-weak); color: var(--primary); }
+
+/* 추출 실패 */
+.failBox { background: #fff0f0; border-radius: var(--radius); padding: 18px 22px 22px; }
+.failTitle { margin: 0 0 16px; color: #af3c3c; font-size: 20px; line-height: 32px; font-weight: 700; }
+.failBox .help { font-size: 13px; line-height: 21px; margin-bottom: 16px; }
+.wideButton { min-width: 208px; }
+
+/* 확정 뒤 안내 */
+.lockedBox { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 19px 22px 24px; }
+.lockedTitle { margin: 0 0 14px; font-size: 15px; line-height: 24px; font-weight: 700; }
+.lockedBox .help { font-size: 13px; line-height: 21px; }
+
+/* 휴대폰 폭 */
+@media (max-width: 768px) {
+  .page { padding: 16px; }
+  .layout { grid-template-columns: 1fr; }
+}

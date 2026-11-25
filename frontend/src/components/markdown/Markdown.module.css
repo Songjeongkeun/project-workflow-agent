@@ -1,0 +1,5 @@
+.markdown table { border-collapse: collapse; margin: 8px 0; }
+.markdown th, .markdown td { border: 1px solid var(--border); padding: 4px 8px; color: inherit; font-size: inherit; font-weight: inherit; }
+.markdown th { font-weight: 700; }
+.markdown h1 { font-size: 18px; margin: 4px 0 8px; }
+.markdown h2 { font-size: 15px; margin: 16px 0 6px; }

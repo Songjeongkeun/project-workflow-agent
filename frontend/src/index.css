@@ -1,0 +1,60 @@
+/* 공통 색과 기본 스타일. 화면별 스타일은 각 폴더의 .module.css에 둔다. */
+:root {
+  /* 피그마(최종프로젝트) 화면의 색 */
+  --bg: #f7f8fa;
+  --panel: #ffffff;
+  --border: #e2e3ea;
+  --text: #24232d;
+  --muted: #686875;
+  --primary: #6050cb;
+  --primary-weak: #efedfb;
+  --ok: #2f7d43;
+  --ok-weak: #e8f5ec;
+  --warn: #8a5b12;
+  --warn-weak: #fff6e6;
+  --bad: #c2410c;
+  --bad-weak: #fdece6;
+  --info: #3f51b5;
+  --info-weak: #eef0fb;
+  /* 왼쪽 메뉴 (어두운 색) */
+  --nav-bg: #19191f;
+  --nav-text: #b7b6c4;
+  --nav-line: #35353d;
+  --nav-active-bg: #302b4d;
+  --nav-active-text: #e7e1ff;
+  --nav-count-bg: #484153;
+  --radius: 8px;
+  --sidebar: 232px;
+  --header: 72px;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); }
+h1, h2, h3 { margin: 0; }
+h1 { font-size: 28px; line-height: 45px; font-weight: 700; }
+h2 { font-size: 15px; font-weight: 700; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+input, textarea, select {
+  font: inherit; color: inherit; width: 100%;
+  padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; background: #fff;
+}
+textarea { resize: vertical; }
+label { display: flex; flex-direction: column; gap: 4px; font-weight: 500; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--muted); font-weight: 700; font-size: 12px; }
+blockquote { margin: 8px 0; padding: 8px 12px; border-left: 3px solid var(--primary); background: var(--primary-weak); }
+
+/* 여러 화면에서 쓰는 글자 표시 */
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.mono { font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+
+/* 입력 칸을 고르면 주 색(보라) 테두리 */
+input:focus, textarea:focus, select:focus { outline: 3px solid var(--primary-weak); border-color: var(--primary); }

@@ -1,0 +1,11 @@
+.tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--border); }
+.tab {
+  min-width: 160px; height: 46px; padding: 8px 0 0; text-align: left; margin-bottom: -1px;
+  border: none; border-bottom: 2px solid transparent; background: none; cursor: pointer;
+  font: inherit; font-size: 14px; color: var(--muted); align-self: flex-start;
+}
+.active { color: var(--primary); font-weight: 700; border-bottom-color: var(--primary); }
+
+@media (max-width: 768px) {
+  .tab { min-width: 0; padding: 8px 12px 0; }
+}

@@ -1,0 +1,18 @@
+/* 피그마 SCR-001: 왼쪽 위 "Orbit", 가운데 폭 420px 로그인 폼 (위에서 230px) */
+.page { min-height: 100vh; background: var(--bg); position: relative; padding: 0 16px; }
+.brand { position: absolute; left: 64px; top: 42px; font-size: 26px; line-height: 42px; font-weight: 700; color: var(--text); }
+.form { width: min(420px, 100%); margin: 0 auto; padding-top: 230px; display: flex; flex-direction: column; }
+.title { font-size: 30px; line-height: 48px; }
+.sub { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 22px; }
+.field { margin-top: 48px; gap: 9px; font-size: 13px; font-weight: 700; line-height: 21px; }
+.field + .field { margin-top: 26px; }
+.field input { height: 46px; padding: 0 13px; border-radius: 8px; font-size: 14px; font-weight: 400; }
+.field input::placeholder { color: var(--muted); }
+.error { margin: 14px 0 0; color: #af3c3c; font-size: 13px; line-height: 21px; }
+.form > button { margin-top: 48px; }
+.error + button { margin-top: 13px !important; }
+
+@media (max-width: 768px) {
+  .brand { left: 16px; top: 16px; }
+  .form { padding-top: 120px; }
+}
