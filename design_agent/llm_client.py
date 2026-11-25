@@ -40,7 +40,7 @@ def generate_text(prompt: str) -> str:
     # API 요청
     response = client.messages.create(
         model=model,
-        max_tokens=1024,
+        max_tokens=8192,
         messages=[{
             "role": "user",
             "content": prompt
@@ -181,7 +181,7 @@ def generate_screen_plan_with_ai(planning: PlanningInput, project_id: str) -> Sc
 
     response = client.messages.parse(
         model=model,
-        max_tokens=4096,
+        max_tokens=16384,
         messages=[{
             "role": "user",
             "content": prompt
