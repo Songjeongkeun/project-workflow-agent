@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent
 def main() -> int:
     """
     A01 기획서 JSON을 입력 받아 A02 화면 계획을 생성하고 저장한다.
-    planning.json -> screen_plan.json 생성
+    planning.json -> 기획서명_UI.json 생성
     """
     try: 
         # ArgumentParser() : 명령줄 인자를 처리하는 객체 생성
@@ -65,7 +65,8 @@ def main() -> int:
         print("[화면 계획 검증 성공]")
 
         # JSON 파일 저장
-        output_path = BASE_DIR / "screen_plan.json"
+        output_filename = f"{input_path.stem}_UI.json"
+        output_path = BASE_DIR / output_filename
 
         output_path.write_text(
             screen_plan.model_dump_json(indent=2),
